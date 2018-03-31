@@ -1,0 +1,310 @@
+@import "../valo/valo.scss";
+
+$v-font-size: 15px;
+$v-font-family: "Droid Sans", Arial;
+$v-background-color: #ffffff;
+$v-border-radius: 2px;
+$v-border: 1px solid (v-shade 1);
+$v-focus-color: rgb(191,191,191);
+$v-textfield-disabled-opacity: 1;
+@import "../valo/valo.scss";
+
+@mixin my {
+  @include font-face('Droid Sans', '../../../../sfp/fonts/droid-sans', normal, normal);
+  @include valo;
+
+  // Insert your own theme rules here
+  .v-disabled {
+    background: #e4e4e4 ;
+    box-shadow: none;
+  }
+
+  .v-loading-indicator {
+    background-color: #25ced1;
+  }
+  // Horizontal rule with text styling
+  .v-label-hr{
+    width: 100%;
+  }
+
+  .v-label-hr > .v-label-hr-text {
+    line-height: 1em;
+    position: relative;
+    outline: 0;
+    border: 0;
+    color: #25ced1;
+    font-size: 14pt;
+    font-weight: bolder;
+    text-align: center;
+    &:before {
+      content: '';
+      // use the linear-gradient for the fading effect
+      // use a solid background color for a solid bar
+      background: black;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 1px;
+    }
+    &:after {
+      content: attr(data-content);
+      position: relative;
+      display: inline-block;
+      padding: 0 .5em;
+      line-height: 1.5em;
+      // this is really the only tricky part, you need to specify the background color of the container element...
+      background-color: #ffffff;
+    }
+  }
+
+  // SFP buttons styles
+  .v-button {
+    width: 217px;
+    height: 52px;
+    border: none;
+    color: #ffffff;
+    outline: none;
+    box-shadow: none;
+    &:hover {
+      &:after {
+        background-color: transparent;
+      }
+    }
+    &:focus {
+      &:after {
+        border: none;
+        box-shadow: none;
+      }
+    }
+  }
+
+  .v-button-one {
+    background: #25ced1;
+    &:hover {
+      background-color: #21A7A9;
+    }
+    &:active {
+      background-color: #2D3E50;
+    }
+  }
+
+  .v-button-two {
+    background: #ff8a5b;
+    &:hover {
+      background-color: #db7349;
+    }
+    &:active {
+      background-color: #2D3E50;
+    }
+  }
+
+  .v-button-three {
+    background: #ffffff;
+    border: 1px solid #ea526f;
+    color: #ea526f;
+    &:hover {
+      background-color: #ea526f;
+      color: #ffffff;
+    }
+    &:active {
+      background-color: #c0435b;
+      color: #ffffff;
+    }
+  }
+
+  .v-customcomponent {
+    width: 100%;
+    height: 100%;
+  }
+
+  // ServiceProviderCreationPage styling
+  .v-verticallayout-service_provider_creation{
+    max-width: 1000px;
+    width: 1000px;
+    padding-left: 40px;
+    padding-right: 37px;
+  }
+
+  .v-caption {
+    padding-bottom: 1em;
+    padding-top: 1.8em;
+  }
+
+  .v-captiontext {
+    font-size: 15pt;
+    font-weight: bold;
+    color: #2d3e50;
+  }
+
+  .v-caption-required > span.v-captiontext {
+    &:before {
+      content: '*';
+      color: #25ced1;
+      padding-right: 0.2em;
+    }
+  }
+
+  .v-textfield {
+    width: 600px;
+    height: 40px;
+  }
+
+  .v-textfield-street {
+    width: 406px;
+    height: 40px;
+  }
+
+  .v-textfield-address-detail {
+    width: 86px;
+    height: 40px;
+  }
+
+  .v-filterselect-input {
+    background: #ffffff !important;
+    box-shadow: none !important;
+  }
+
+  .v-disabled > .v-filterselect-input  {
+    background: #dfdfdf !important;
+    box-shadow: none !important;
+  }
+
+  .v-filterselect-no-input {
+    width: 600px;
+    height: 40px;
+  }
+
+  //ComboBox styles
+  //
+  .v-filterselect-button {
+    &:before {
+      content: "\25BE" !important;
+      font-size: 2em;
+      font-stretch: ultra-expanded;
+    }
+  }
+
+  .v-filterselect-focus [class$="button"] {
+    color: #25ced1;
+  }
+
+  //Dropdown menu
+  .v-filterselect-suggestmenu {
+    height: 225px;
+    .gwt-MenuItem {
+      padding: 0 .5em;
+      display: block;
+      background: #ffffff;
+      height: 45px;
+      text-align: start;
+      vertical-align: middle;
+      border-radius: 0px;
+      border-bottom: 1px solid #bcbcbc;
+      color: black;
+      &:hover {
+        background-color: #fceade;
+      }
+    }
+  }
+
+  .v-filterselect-status {
+    text-decoration: blink;
+  }
+
+  .v-verticallayout-service_provider_creation .v-button {
+    position: relative;
+    left: 41.5%;
+  }
+
+  .gwt-MenuItem .v-checkbox > input ~ label{
+    &:before {
+      visibility: hidden;
+    }
+    &:after {
+      visibility: hidden;
+    }
+  }
+
+  .gwt-MenuItem > span ~ span:last-child {
+    margin-left: -22px;
+  }
+
+  .gwt-MenuItem[aria-checked="true"]{
+    background: #fceade;
+  }
+
+  ::-webkit-scrollbar {
+    width: 18px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #dfdfdf;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #2d3e50;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(13, 34, 47, 0.9);
+  }
+
+
+  .closable-label {
+    width: inherit;
+    cursor: pointer;
+    padding: 0 0.5em;
+    border-radius: 3px;
+    color: #ffffff;
+    background-color: #ff8a5b;
+    margin-right: 5px;
+    &:after {
+      content: "\2716";
+      font-family: "Vaadin-Icons";
+      padding-left: 0.5em;
+    }
+  }
+  //--------------------------------------
+  .provaider-address{
+    color: #8e8d8d;
+    width: 100%;
+  }
+
+  .v-label-hr-provaider-name{
+    font-size: 20px;
+    color: #2d3e50;
+    font-weight: 700;
+    width: 100%;
+    border-top: #b2b1b1 solid 1px;
+  }
+
+  .v-textfield-provider-search{
+    border-radius: 2px;
+    opacity: 1;
+    height: 52px;
+    margin-right: 0px;
+  }
+
+  .v-button-two-category{
+    height: 22px;
+    width: auto;
+    margin-right: 7px;
+    margin-bottom: 3px;
+    margin-top: 2px;
+
+    background: #ff8a5b;
+    &:hover {
+      background-color: #db7349;
+    }
+    &:active {
+      background-color: #2D3E50;
+    }
+
+
+  }
+
+  //--------------------------------------
+
+}
