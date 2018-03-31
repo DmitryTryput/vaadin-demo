@@ -1,0 +1,7 @@
+@import "my";
+@import "addons";
+
+.my {
+  @include addons;
+  @include my;
+}
