@@ -10,5 +10,4 @@ public class ReturnButton extends Button {
         addClickListener(event ->
                 getUI().getPage().setLocation("/domainCategories?action=creation"));
     }
-
 }

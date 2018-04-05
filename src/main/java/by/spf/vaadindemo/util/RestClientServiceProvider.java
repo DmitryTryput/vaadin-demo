@@ -16,8 +16,9 @@ import java.util.List;
 @Component
 public class RestClientServiceProvider {
 
-    private String url = "http://178.124.206.49:8080/SFP/domainCategories";
+    private String url;
 
+//    "http://178.124.206.49:8080/SFP/domainCategories"
 
     private final RestTemplate restTemplate;
 
