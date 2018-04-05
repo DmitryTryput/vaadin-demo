@@ -1,7 +1,7 @@
-@import "my";
+@import "sfp";
 @import "addons";
 
 .my {
   @include addons;
-  @include my;
+  @include sfp;
 }

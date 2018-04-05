@@ -9,7 +9,7 @@ $v-focus-color: rgb(191, 191, 191);
 $v-textfield-disabled-opacity: 1;
 @import "../valo/valo.scss";
 
-@mixin my {
+@mixin sfp {
   @include font-face('Droid Sans', '../../../../sfp/fonts/droid-sans', normal, normal);
   @include valo;
 
@@ -192,14 +192,16 @@ $v-textfield-disabled-opacity: 1;
   //Dropdown menu
   .v-filterselect-suggestmenu {
     height: 225px;
+    border-color: black;
+    border-radius: 3px;
     .gwt-MenuItem {
+      font-size: 18px;
       padding: 0 .5em;
       display: block;
       background: #ffffff;
       height: 45px;
       text-align: start;
       vertical-align: middle;
-      border-radius: 0px;
       border-bottom: 1px solid #bcbcbc;
       color: black;
       &:hover {
@@ -367,12 +369,9 @@ $v-textfield-disabled-opacity: 1;
 
     height: 52px;
     font-size: 18px;
-    border-color: #2c3d4f;
-    border-radius: 3px;
-    .gwt-MenuItem {
-      &:hover {
-        background-color: #ff8a5b;
-      }
+    &:placeholder-shown {
+      border-color: #bfbfbf;
+      border-radius: 2px;
     }
   }
 

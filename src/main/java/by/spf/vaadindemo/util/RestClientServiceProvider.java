@@ -3,33 +3,20 @@ package by.spf.vaadindemo.util;
 import by.spf.vaadindemo.domain.DomainCategory;
 import by.spf.vaadindemo.mapping.ClassCategoryMapper;
 import by.spf.vaadindemo.mapping.DomainCategoryMapper;
-import org.glassfish.jersey.jackson.JacksonFeature;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.List;
-
-import static javax.ws.rs.client.Entity.json;
-
 
 @Component
 public class RestClientServiceProvider {
 
-    //    private String url = "http://178.124.206.49:8080/SFP/domainCategories";
-    private String url = "http://localhost:8080/domainCategories";
+    private String url = "http://178.124.206.49:8080/SFP/domainCategories";
 
 
     private final RestTemplate restTemplate;
