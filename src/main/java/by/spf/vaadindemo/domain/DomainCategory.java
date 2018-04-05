@@ -1,27 +1,16 @@
 package by.spf.vaadindemo.domain;
 
-
-
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
-
-
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 public class DomainCategory {
 
-
     private Long id;
-
-
     private String name;
-
-    private Set<ClassCategory> classCategories = new HashSet<>();
-
-    public DomainCategory(String name) {
-        this.name = name;
-    }
 }
+
+
