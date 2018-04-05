@@ -8,7 +8,6 @@ public class ReturnButton extends Button {
         setCaption("Вернуться");
         setStyleName("v-button-saved ");
         addClickListener(event ->
-                getUI().getPage().setLocation("http://localhost:8080/domainCategories?action=creation"));
+                getUI().getPage().setLocation("/domainCategories?action=creation"));
     }
-
 }
