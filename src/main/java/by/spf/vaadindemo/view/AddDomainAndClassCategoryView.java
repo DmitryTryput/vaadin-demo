@@ -1,73 +1,48 @@
 package by.spf.vaadindemo.view;
 
-import by.spf.vaadindemo.domain.DomainCategory;
+import by.spf.vaadindemo.component.layout.AddDomainAndClassCategoryLayout;
+import by.spf.vaadindemo.component.layout.NavigationLayout;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.spring.annotation.SpringView;
+import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.VerticalLayout;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import javax.annotation.PostConstruct;
 
+@UIScope
 @SpringView(name = AddDomainAndClassCategoryView.VIEW_NAME)
 public class AddDomainAndClassCategoryView extends GridLayout implements View {
     static final String VIEW_NAME = "addDomainAndClassCategory";
 
+    private NavigationLayout navigationLayout;
+
+    @Autowired
+    private AddDomainAndClassCategoryLayout addDomainAndClassCategoryLayout;
+
     @PostConstruct
     void init() {
+        setView();
+        setLayouts();
+    }
 
-        super.setColumns(7);
-        super.setRows(7);
-        super.setSpacing(true);
-        super.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
-        super.setWidth("100%");
+    private void setView() {
+        setColumns(5);
+        setRows(4);
+        setDefaultComponentAlignment(Alignment.TOP_LEFT);
+        setWidth(100.0f, Unit.PERCENTAGE);
+        setHeight(80.0f, Unit.PERCENTAGE);
+    }
 
-        Label domainLabel = new Label("Категория сферы услуг");
-        addComponent(domainLabel, 1, 1);
-        setComponentAlignment(domainLabel, Alignment.MIDDLE_LEFT);
-
-        TextField domainField = new TextField();
-        domainField.setWidth("100%");
-        domainField.setPlaceholder("Укажите категорию сферы услуг");
-        domainField.setStyleName("v-textfield-provider-search");
-        addComponent(domainField, 1, 2, 3, 2);
-
-        Label classLabel = new Label("Категория вида услуг");
-        addComponent(classLabel, 1, 3);
-        setComponentAlignment(classLabel, Alignment.MIDDLE_LEFT);
-
-        TextField classField = new TextField();
-        classField.setWidth("100%");
-        classField.setPlaceholder("Укажите категорию вида услуг");
-        classField.setStyleName("v-textfield-provider-search");
-        addComponent(classField, 1, 4, 3, 4);
-
-        Label findLabel = new Label("Передумали создавать категорию сферы услуг?");
-        addComponent(findLabel, 5, 2);
-
-        Button button = new Button("Выбрать существующую категорию сферы услгу");
-        button.setStyleName("link");
-        button.addClickListener(e -> getUI().getNavigator().navigateTo("addClassCategory"));
-        addComponent(button, 5, 3);
-
-
-        Button save = new Button("Сохранить");
-
-        save.setWidth("100%");
-        save.addStyleName("v-button-one");
-        save.addClickListener(e -> {
-            Notification.show("Value changed:",
-                    String.valueOf(domainField.getValue()),
-                    Notification.Type.TRAY_NOTIFICATION);
-        });
-        addComponent(save, 2, 6,3,6);
-        setComponentAlignment(save, Alignment.BOTTOM_CENTER);
+    private void setLayouts() {
+        addComponent(addDomainAndClassCategoryLayout,0,0,2,3);
+        navigationLayout = new NavigationLayout("Передумали создавать категорию сферы услуг?",
+                "Выбрать существующую категорию сферы услуг",
+                "addClassCategory");
+        addComponent(navigationLayout,3,0);
+        setComponentAlignment(navigationLayout, Alignment.BOTTOM_CENTER);
+        addDomainAndClassCategoryLayout.setSaveButton(this, navigationLayout);
     }
 
     @Override

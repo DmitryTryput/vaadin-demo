@@ -5,7 +5,7 @@ $v-font-family: "Droid Sans", Arial;
 $v-background-color: #ffffff;
 $v-border-radius: 2px;
 $v-border: 1px solid (v-shade 1);
-$v-focus-color: rgb(191,191,191);
+$v-focus-color: rgb(191, 191, 191);
 $v-textfield-disabled-opacity: 1;
 @import "../valo/valo.scss";
 
@@ -15,7 +15,7 @@ $v-textfield-disabled-opacity: 1;
 
   // Insert your own theme rules here
   .v-disabled {
-    background: #e4e4e4 ;
+    background: #e4e4e4;
     box-shadow: none;
   }
 
@@ -23,7 +23,7 @@ $v-textfield-disabled-opacity: 1;
     background-color: #25ced1;
   }
   // Horizontal rule with text styling
-  .v-label-hr{
+  .v-label-hr {
     width: 100%;
   }
 
@@ -119,7 +119,7 @@ $v-textfield-disabled-opacity: 1;
   }
 
   // ServiceProviderCreationPage styling
-  .v-verticallayout-service_provider_creation{
+  .v-verticallayout-service_provider_creation {
     max-width: 1000px;
     width: 1000px;
     padding-left: 40px;
@@ -165,7 +165,7 @@ $v-textfield-disabled-opacity: 1;
     box-shadow: none !important;
   }
 
-  .v-disabled > .v-filterselect-input  {
+  .v-disabled > .v-filterselect-input {
     background: #dfdfdf !important;
     box-shadow: none !important;
   }
@@ -217,7 +217,7 @@ $v-textfield-disabled-opacity: 1;
     left: 41.5%;
   }
 
-  .gwt-MenuItem .v-checkbox > input ~ label{
+  .gwt-MenuItem .v-checkbox > input ~ label {
     &:before {
       visibility: hidden;
     }
@@ -230,7 +230,7 @@ $v-textfield-disabled-opacity: 1;
     margin-left: -22px;
   }
 
-  .gwt-MenuItem[aria-checked="true"]{
+  .gwt-MenuItem[aria-checked="true"] {
     background: #fceade;
   }
 
@@ -251,7 +251,6 @@ $v-textfield-disabled-opacity: 1;
     background: rgba(13, 34, 47, 0.9);
   }
 
-
   .closable-label {
     width: inherit;
     cursor: pointer;
@@ -267,12 +266,12 @@ $v-textfield-disabled-opacity: 1;
     }
   }
   //--------------------------------------
-  .provaider-address{
+  .provaider-address {
     color: #8e8d8d;
     width: 100%;
   }
 
-  .v-label-hr-provaider-name{
+  .v-label-hr-provaider-name {
     font-size: 20px;
     color: #2d3e50;
     font-weight: 700;
@@ -280,14 +279,14 @@ $v-textfield-disabled-opacity: 1;
     border-top: #b2b1b1 solid 1px;
   }
 
-  .v-textfield-provider-search{
+  .v-textfield-provider-search {
     border-radius: 2px;
     opacity: 1;
     height: 52px;
     margin-right: 0px;
   }
 
-  .v-button-two-category{
+  .v-button-two-category {
     height: 22px;
     width: auto;
     margin-right: 7px;
@@ -302,7 +301,91 @@ $v-textfield-disabled-opacity: 1;
       background-color: #2D3E50;
     }
 
+  }
 
+  .v-textfield-error {
+    border-radius: 2px;
+    font-size: 18px;
+    opacity: 1;
+    height: 52px;
+    margin-right: 0;
+    border-color: #ea526f;
+  }
+
+  .v-label-text {
+    font-size: 20px;
+    color: #2d3e50;
+    font-weight: 700;
+    width: 100%;
+  }
+
+  .v-label-save {
+    font-size: 20px;
+    color: #25ced1;
+    font-weight: 700;
+    width: 100%;
+  }
+
+  .error-message {
+    font-size: 18px;
+    color: #ea526f;
+  }
+
+  .link-label {
+    font-size: 18px;
+  }
+
+  .link {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    font-size: 18px;
+    /*optional*/
+    font-family: arial, sans-serif; /*input has OS specific font-family*/
+    color: #ff8a5b;
+    text-decoration: underline;
+    cursor: pointer;
+    &:hover {
+      color: #ff8a5b;
+    }
+  }
+
+  .v-textfield-category {
+    font-size: 18px;
+    border-color: #2c3d4f;
+    border-radius: 3px;
+    opacity: 1;
+    height: 52px;
+    margin-right: 0px;
+    &:placeholder-shown {
+      border-color: #bfbfbf;
+      border-radius: 2px;
+    }
+  }
+  //Dropdown menu
+  .v-combobox {
+
+    height: 52px;
+    font-size: 18px;
+    border-color: #2c3d4f;
+    border-radius: 3px;
+    .gwt-MenuItem {
+      &:hover {
+        background-color: #ff8a5b;
+      }
+    }
+  }
+
+  .v-button-return {
+    background: #2D3E50;
+  }
+
+  .v-button-saved {
+    background: #2D3E50;
+  }
+
+  .v-button-disable {
+    background: #bfbfbf;
   }
 
   //--------------------------------------
