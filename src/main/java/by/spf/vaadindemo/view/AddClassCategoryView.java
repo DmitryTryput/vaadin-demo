@@ -9,13 +9,14 @@ import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.GridLayout;
 
+import com.vaadin.ui.HorizontalLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 
 @UIScope
 @SpringView(name = AddClassCategoryView.VIEW_NAME)
-public class AddClassCategoryView extends GridLayout implements View {
+public class AddClassCategoryView extends HorizontalLayout implements View {
     static final String VIEW_NAME = "addClassCategory";
 
     private NavigationLayout navigationLayout;
@@ -31,21 +32,20 @@ public class AddClassCategoryView extends GridLayout implements View {
     }
 
     private void setView() {
-        setColumns(5);
-        setRows(4);
-        setDefaultComponentAlignment(Alignment.TOP_RIGHT);
-        setWidth(100.0f, Unit.PERCENTAGE);
-        setHeight(80.0f, Unit.PERCENTAGE);
+        setWidth("100%");
+        setDefaultComponentAlignment(Alignment.TOP_CENTER);
     }
 
     private void setLayouts() {
-        addComponent(addClassCategoryLayout,0,0,2,3);
+        addComponent(addClassCategoryLayout);
         addClassCategoryLayout.setSaveButton(this, addClassCategoryLayout, navigationLayout);
         navigationLayout = new NavigationLayout("Искомая категория сферы услуг отсутсвует?",
                 "Создать категорию сферы услуг",
                 "addDomainAndClassCategory");
-        addComponent(navigationLayout,3,0);
+        setExpandRatio(addClassCategoryLayout, 3.0f);
+        addComponent(navigationLayout);
         setComponentAlignment(navigationLayout, Alignment.BOTTOM_CENTER);
+        setExpandRatio(navigationLayout, 2.0f);
     }
 
     @Override

@@ -9,7 +9,7 @@ public class NavigationLayout extends VerticalLayout {
 
     public NavigationLayout(String labelText, String linkText, String viewName) {
 
-        setWidth(100.0f, Unit.PERCENTAGE);
+        setWidth(40.0f, Unit.PERCENTAGE);
         setHeight(50.0f, Unit.PERCENTAGE);
         setDefaultComponentAlignment(Alignment.TOP_CENTER);
         Label findLabel = new Label(labelText);

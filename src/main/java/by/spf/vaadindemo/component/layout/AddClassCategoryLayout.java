@@ -41,7 +41,6 @@ public class AddClassCategoryLayout extends VerticalLayout {
     }
 
     private void setLayout() {
-        setSizeFull();
         setDefaultComponentAlignment(Alignment.TOP_RIGHT);
     }
 
