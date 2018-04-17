@@ -37,12 +37,9 @@ public class AddDomainAndClassCategoryView extends GridLayout implements View {
 
     private void setLayouts() {
         addComponent(addDomainAndClassCategoryLayout,0,0,2,3);
-        navigationLayout = new NavigationLayout("Передумали создавать категорию сферы услуг?",
-                "Выбрать существующую категорию сферы услуг",
-                "addClassCategory");
         addComponent(navigationLayout,3,0);
         setComponentAlignment(navigationLayout, Alignment.BOTTOM_CENTER);
-        addDomainAndClassCategoryLayout.setSaveButton(this, navigationLayout);
+
     }
 
     @Override

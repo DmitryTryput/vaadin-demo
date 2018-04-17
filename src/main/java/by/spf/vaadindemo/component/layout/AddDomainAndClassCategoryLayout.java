@@ -11,6 +11,7 @@ import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.VerticalLayout;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,67 +23,46 @@ import java.util.Arrays;
 
 @UIScope
 @SpringComponent
-public class AddDomainAndClassCategoryLayout extends VerticalLayout {
+public class AddDomainAndClassCategoryLayout extends CustomVerticalLayout {
 
     @Autowired
     private RestClientServiceProvider restClientServiceProvider;
 
     private AddTextField domainCategoryTextField;
     private AddTextField classCategoryTextField;
+
     private SaveButton saveButton;
     private ErrorLabel domainErrorLabel;
     private ErrorLabel classErrorLabel;
 
     @PostConstruct
     public void init() {
-        setLayout();
         setDomainField();
         setClassField();
-
+        setSaveButton();
     }
 
-    private void setLayout() {
-        setSizeFull();
-        setDefaultComponentAlignment(Alignment.TOP_LEFT);
-    }
 
     private void setDomainField() {
-        new CustomLabel("Категория сферы услуг", this);
+        new CustomLabel("Категория сферы услуг", getFieldsLayout());
         domainCategoryTextField = new AddTextField("Укажите категорию вида услуг", true);
         domainCategoryTextField.addValueChangeListener(this::valueChange);
-        addComponent(domainCategoryTextField);
-        domainErrorLabel = new ErrorLabel(this);
+        getFieldsLayout().addComponent(domainCategoryTextField);
+        domainErrorLabel = new ErrorLabel(getFieldsLayout());
     }
 
     private void setClassField() {
-        new CustomLabel("Категория вида услуг", this);
+        new CustomLabel("Категория вида услуг", getFieldsLayout());
         classCategoryTextField = new AddTextField("Укажите категорию вида услуг", true);
-        addComponent(classCategoryTextField);
+        getFieldsLayout().addComponent(classCategoryTextField);
         classCategoryTextField.addValueChangeListener(this::valueChange);
-        classErrorLabel = new ErrorLabel(this);
+        classErrorLabel = new ErrorLabel(getFieldsLayout());
     }
 
-    public void setSaveButton(Layout rootLayout, Component... removeComponents) {
+    public void setSaveButton() {
         saveButton = new SaveButton(true);
-        addComponent(saveButton);
-        setComponentAlignment(saveButton, Alignment.BOTTOM_RIGHT);
-        saveButton.addClickListener(e -> {
-            ResponseEntity response = restClientServiceProvider.saveDomainCategoryWithClassCategory(new DomainCategoryMapper(
-                    domainCategoryTextField.getValue(),
-                    classCategoryTextField.getValue()));
-            if (response.getStatusCodeValue() == 201) {
-                rootLayout.replaceComponent(this,
-                        new SavedLayout(domainCategoryTextField.getValue(),
-                                classCategoryTextField.getValue(),
-                                "Значение сохранено "));
-                Arrays.stream(removeComponents).forEach(rootLayout::removeComponent);
-            } else {
-                domainCategoryTextField.showError();
-                domainErrorLabel.showError();
-                classCategoryTextField.showError();
-                classErrorLabel.showError();
-            }
-        });
+        getButtonLayout().addComponent(saveButton);
+        getButtonLayout().setComponentAlignment(saveButton, Alignment.BOTTOM_RIGHT);
     }
 
     private void valueChange(HasValue.ValueChangeEvent<String> e) {
