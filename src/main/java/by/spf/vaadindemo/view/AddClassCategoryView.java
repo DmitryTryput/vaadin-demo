@@ -44,6 +44,7 @@ public class AddClassCategoryView extends HorizontalLayout implements View {
 
     private void setLayouts() {
         addComponent(addClassCategoryLayout);
+        addClassCategoryLayout.setSaveButton(this, addClassCategoryLayout, addClassCategoryNavigationLayout);
         setExpandRatio(addClassCategoryLayout, 6.0f);
 
     }

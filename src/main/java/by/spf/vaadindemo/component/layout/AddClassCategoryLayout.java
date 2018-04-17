@@ -5,12 +5,18 @@ import by.spf.vaadindemo.component.CustomLabel;
 import by.spf.vaadindemo.component.ErrorLabel;
 import by.spf.vaadindemo.component.SaveButton;
 import by.spf.vaadindemo.domain.DomainCategory;
+import by.spf.vaadindemo.mapping.ClassCategoryMapper;
 import by.spf.vaadindemo.util.RestClientServiceProvider;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
-import com.vaadin.ui.Alignment;
+import com.vaadin.ui.AbstractLayout;
+import com.vaadin.ui.AbstractOrderedLayout;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.Layout;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import javax.annotation.PostConstruct;
 
@@ -20,7 +26,7 @@ import javax.annotation.PostConstruct;
 public class AddClassCategoryLayout extends CustomVerticalLayout {
 
 
-
+    private SavedLayout savedLayout;
 
     @Autowired
     private RestClientServiceProvider restClientServiceProvider;
@@ -33,7 +39,6 @@ public class AddClassCategoryLayout extends CustomVerticalLayout {
     public void init() {
         setDomainComboBox();
         setClassCategoryField();
-        setSaveButton();
     }
 
 
@@ -49,27 +54,47 @@ public class AddClassCategoryLayout extends CustomVerticalLayout {
         domainCategoryComboBox.setEmptySelectionAllowed(false);
         domainCategoryComboBox.addValueChangeListener(event -> classCategoryTextField.setEnabled(true));
         getFieldsLayout().addComponent(domainCategoryComboBox);
-        new ErrorLabel( getFieldsLayout());
+        new ErrorLabel(getFieldsLayout());
     }
 
     private void setClassCategoryField() {
         new CustomLabel("Категория вида услуг", getFieldsLayout());
         classCategoryTextField = new AddTextField("Укажите категорию вида услуг", false);
         classCategoryTextField.addValueChangeListener(e -> {
-           if (!classCategoryTextField.isEmpty()) {
-               saveButton.setButtonEnable();
-           } else {
-               saveButton.setButtonDisable();
+            if (!classCategoryTextField.isEmpty()) {
+                saveButton.setButtonEnable();
+            } else {
+                saveButton.setButtonDisable();
             }
         });
         getFieldsLayout().addComponent(classCategoryTextField);
-        errorLabel = new ErrorLabel( getFieldsLayout());
+        errorLabel = new ErrorLabel(getFieldsLayout());
     }
 
-    public void setSaveButton() {
+    public DomainCategory getDomainCategory() {
+        return  domainCategoryComboBox.getValue();
+    }
+
+    public String getClassCategoryValue() {
+        return  classCategoryTextField.getValue();
+    }
+
+    public void setSaveButton(AbstractOrderedLayout root, Layout replaceLayout, Layout deleteLayout) {
         saveButton = new SaveButton(false);
         saveButton.addClickListener(e -> {
+            Long domainCategoryId = domainCategoryComboBox.getValue().getId();
+            ClassCategoryMapper classCategoryMapper = new ClassCategoryMapper(
+                    classCategoryTextField.getValue());
+            ResponseEntity response = restClientServiceProvider.saveClassCategory(domainCategoryId, classCategoryMapper);
+            if (response.getStatusCode() == HttpStatus.CREATED) {
+                savedLayout = new SavedLayout(domainCategoryComboBox.getValue().getName(), classCategoryTextField.getValue());
+                root.replaceComponent(replaceLayout, savedLayout);
+                root.removeComponent(deleteLayout);
 
+            } else {
+                classCategoryTextField.showError();
+                errorLabel.showError();
+            }
         });
         getButtonLayout().addComponent(saveButton);
     }

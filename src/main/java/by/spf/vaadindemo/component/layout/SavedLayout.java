@@ -10,22 +10,22 @@ import com.vaadin.ui.Label;
 
 public class SavedLayout extends CustomVerticalLayout {
 
-    public SavedLayout(String domainTextField, String classTextField, String saveText) {
+    public SavedLayout(String domainTextField, String classTextField) {
         super();
         setField(domainTextField, "Категория сферы услуг");
         setField(classTextField, "Категория вида услуг");
-        setReturnButton(saveText);
+        setReturnButton();
 
     }
 
     private void setField(String domainTextField, String label) {
         new CustomLabel(label, getFieldsLayout());
-        addComponent(new SavedTextField(domainTextField));
+        getFieldsLayout().addComponent(new SavedTextField(domainTextField));
         new ErrorLabel(getFieldsLayout());
     }
 
-    private void setReturnButton(String saveText) {
-        Label saveLabel = new Label(saveText);
+    private void setReturnButton() {
+        Label saveLabel = new Label("Значение сохранено!");
         saveLabel.setStyleName("v-label-save");
         getButtonLayout().addComponent(saveLabel);
         getButtonLayout().setComponentAlignment(saveLabel, Alignment.MIDDLE_CENTER);
