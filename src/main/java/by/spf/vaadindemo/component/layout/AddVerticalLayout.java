@@ -6,12 +6,12 @@ import com.vaadin.ui.VerticalLayout;
 import lombok.Getter;
 
 @Getter
-public class CustomVerticalLayout extends VerticalLayout {
+public class AddVerticalLayout extends VerticalLayout {
 
     private VerticalLayout fieldsLayout;
     private HorizontalLayout buttonLayout;
 
-    public CustomVerticalLayout() {
+    public AddVerticalLayout() {
         setDefaultComponentAlignment(Alignment.TOP_RIGHT);
         fieldsLayout = new VerticalLayout();
         addComponent(fieldsLayout);

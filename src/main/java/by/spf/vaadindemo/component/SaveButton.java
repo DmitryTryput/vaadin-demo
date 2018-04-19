@@ -1,6 +1,5 @@
 package by.spf.vaadindemo.component;
 
-
 import com.vaadin.ui.Button;
 
 public class SaveButton extends Button {
@@ -20,5 +19,4 @@ public class SaveButton extends Button {
         setEnabled(false);
         setStyleName("v-button-disable");
     }
-
 }

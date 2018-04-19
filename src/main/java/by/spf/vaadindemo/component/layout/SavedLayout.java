@@ -8,14 +8,13 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Label;
 
 
-public class SavedLayout extends CustomVerticalLayout {
+public class SavedLayout extends AddClassCategoryLayout {
 
     public SavedLayout(String domainTextField, String classTextField) {
         super();
         setField(domainTextField, "Категория сферы услуг");
         setField(classTextField, "Категория вида услуг");
         setReturnButton();
-
     }
 
     private void setField(String domainTextField, String label) {

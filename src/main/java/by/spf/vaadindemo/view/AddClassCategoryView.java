@@ -18,7 +18,7 @@ import javax.annotation.PostConstruct;
 @UIScope
 @SpringView(name = AddClassCategoryView.VIEW_NAME)
 public class AddClassCategoryView extends HorizontalLayout implements View {
-    static final String VIEW_NAME = "addClassCategory";
+    static final String VIEW_NAME = "domainCategories";
 
     private NavigationLayout addClassCategoryNavigationLayout;
     private NavigationLayout addDomainAndClassCategoryNavigationLayout;
@@ -29,12 +29,12 @@ public class AddClassCategoryView extends HorizontalLayout implements View {
     @Autowired
     private AddDomainAndClassCategoryLayout addDomainAndClassCategoryLayout;
 
-
     @PostConstruct
     void init() {
         setView();
-        setLayouts();
+        setLayout();
         setNavigation();
+        setSaveButtons();
     }
 
     private void setView() {
@@ -42,11 +42,9 @@ public class AddClassCategoryView extends HorizontalLayout implements View {
         setDefaultComponentAlignment(Alignment.TOP_CENTER);
     }
 
-    private void setLayouts() {
+    private void setLayout() {
         addComponent(addClassCategoryLayout);
-        addClassCategoryLayout.setSaveButton(this, addClassCategoryLayout, addClassCategoryNavigationLayout);
         setExpandRatio(addClassCategoryLayout, 6.0f);
-
     }
 
     private void setNavigation() {
@@ -57,8 +55,6 @@ public class AddClassCategoryView extends HorizontalLayout implements View {
                     this.replaceComponent(addClassCategoryLayout, addDomainAndClassCategoryLayout);
                     this.replaceComponent(addClassCategoryNavigationLayout, addDomainAndClassCategoryNavigationLayout);
                 });
-        addComponent(addClassCategoryNavigationLayout);
-        setExpandRatio(addClassCategoryNavigationLayout, 4.0f);
         addDomainAndClassCategoryNavigationLayout = new NavigationLayout(
                 "Передумали создавать категорию сферы услуг?",
                 "Выбрать существующую категорию сферы услуг",
@@ -66,11 +62,16 @@ public class AddClassCategoryView extends HorizontalLayout implements View {
                     this.replaceComponent(addDomainAndClassCategoryLayout, addClassCategoryLayout);
                     this.replaceComponent(addDomainAndClassCategoryNavigationLayout, addClassCategoryNavigationLayout);
                 });
+        addComponent(addClassCategoryNavigationLayout);
+        setExpandRatio(addClassCategoryNavigationLayout, 4.0f);
+    }
+
+    private void setSaveButtons() {
+        addClassCategoryLayout.setSaveButton(this, addClassCategoryNavigationLayout);
+        addDomainAndClassCategoryLayout.setSaveButton(this, addDomainAndClassCategoryNavigationLayout);
     }
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
     }
-
-
 }

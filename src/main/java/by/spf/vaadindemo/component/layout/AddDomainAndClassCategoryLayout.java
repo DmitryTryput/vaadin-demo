@@ -9,28 +9,23 @@ import by.spf.vaadindemo.util.RestClientServiceProvider;
 import com.vaadin.data.HasValue;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Layout;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.AbstractOrderedLayout;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import javax.annotation.PostConstruct;
-import java.util.Arrays;
 
 
 @UIScope
 @SpringComponent
-public class AddDomainAndClassCategoryLayout extends CustomVerticalLayout {
+public class AddDomainAndClassCategoryLayout extends AddClassCategoryLayout {
 
     @Autowired
     private RestClientServiceProvider restClientServiceProvider;
 
     private AddTextField domainCategoryTextField;
     private AddTextField classCategoryTextField;
-
     private SaveButton saveButton;
     private ErrorLabel domainErrorLabel;
     private ErrorLabel classErrorLabel;
@@ -39,9 +34,7 @@ public class AddDomainAndClassCategoryLayout extends CustomVerticalLayout {
     public void init() {
         setDomainField();
         setClassField();
-        setSaveButton();
     }
-
 
     private void setDomainField() {
         new CustomLabel("Категория сферы услуг", getFieldsLayout());
@@ -59,10 +52,26 @@ public class AddDomainAndClassCategoryLayout extends CustomVerticalLayout {
         classErrorLabel = new ErrorLabel(getFieldsLayout());
     }
 
-    public void setSaveButton() {
+
+
+    public void setSaveButton(AbstractOrderedLayout root, NavigationLayout navigation) {
         saveButton = new SaveButton(true);
+        saveButton.addClickListener(e -> {
+            ResponseEntity response = restClientServiceProvider.saveDomainCategoryWithClassCategory(new DomainCategoryMapper(
+                domainCategoryTextField.getValue(),
+                classCategoryTextField.getValue()));
+            if (response.getStatusCode() == HttpStatus.CREATED) {
+                SavedLayout savedLayout = new SavedLayout(domainCategoryTextField.getValue(), classCategoryTextField.getValue());
+                root.replaceComponent(this, savedLayout);
+                navigation.hideNavigation();;
+            } else {
+                domainCategoryTextField.showError();
+                domainErrorLabel.showError();
+                classCategoryTextField.showError();
+                classErrorLabel.showError();
+            }
+        });
         getButtonLayout().addComponent(saveButton);
-        getButtonLayout().setComponentAlignment(saveButton, Alignment.BOTTOM_RIGHT);
     }
 
     private void valueChange(HasValue.ValueChangeEvent<String> e) {

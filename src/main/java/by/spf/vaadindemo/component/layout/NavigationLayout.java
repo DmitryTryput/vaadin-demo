@@ -9,6 +9,8 @@ import com.vaadin.ui.VerticalLayout;
 
 public class NavigationLayout extends VerticalLayout {
 
+    private Label findLabel;
+    private Button navigationLink;
 
     public NavigationLayout(String labelText, String linkText, Button.ClickListener clickListener) {
 
@@ -19,14 +21,21 @@ public class NavigationLayout extends VerticalLayout {
 
         VerticalLayout fields = new VerticalLayout();
         fields.setHeight(20.0f, Unit.PERCENTAGE);
-        Label findLabel = new Label(labelText);
+        findLabel = new Label(labelText);
         findLabel.setStyleName("link-label");
         fields.addComponent(findLabel);
 
-        Button navigationLink = new Button(linkText);
+        navigationLink = new Button(linkText);
         navigationLink.setStyleName("link");
         navigationLink.addClickListener(clickListener);
         fields.addComponent(navigationLink);
         addComponent(fields);
+    }
+
+
+    public void hideNavigation() {
+        findLabel.setValue("");
+        navigationLink.setCaption("");
+        navigationLink.setEnabled(false);
     }
 }

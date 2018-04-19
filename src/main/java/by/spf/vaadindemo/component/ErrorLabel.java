@@ -13,12 +13,10 @@ public class ErrorLabel extends Label {
         setStyleName("error-message");
         layout.addComponent(this);
         layout.setComponentAlignment(this, Alignment.TOP_RIGHT);
-
     }
 
     public void showError() {
         setValue("Данная категория уже существует");
-
     }
 
     public void hideError() {

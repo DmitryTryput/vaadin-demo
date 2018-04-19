@@ -1,6 +1,5 @@
 package by.spf.vaadindemo.component;
 
-
 import com.vaadin.ui.TextField;
 
 public class AddTextField extends TextField {
@@ -10,6 +9,7 @@ public class AddTextField extends TextField {
         setWidth("100%");
         setPlaceholder(placeholder);
         setStyleName("v-textfield-category");
+
     }
 
     public void showError() {
